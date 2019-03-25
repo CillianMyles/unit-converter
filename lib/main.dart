@@ -9,7 +9,6 @@ const _categoryIcon = Icons.cake;
 void main() => runApp(UnitConverterApp());
 
 class UnitConverterApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
