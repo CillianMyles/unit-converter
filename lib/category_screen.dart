@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
-class CategoryRoute extends StatelessWidget {
-  const CategoryRoute();
+const _appName = 'Unit Converter';
+final _bgColor = Colors.green[100];
+
+class CategoryScreen extends StatelessWidget {
+  const CategoryScreen();
 
   static const _categoryNames = <String>[
     'Length',
@@ -27,11 +30,19 @@ class CategoryRoute extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final listView = Container();
-    final appBar = AppBar();
     return Scaffold(
-      appBar: appBar,
-      body: listView,
+      appBar: AppBar(
+        backgroundColor: _bgColor,
+        title: Text(
+          _appName,
+          style: TextStyle(
+            fontSize: 30.0,
+          ),
+        ),
+      ),
+      body: Container(
+        color: _bgColor,
+      ),
     );
   }
 }
