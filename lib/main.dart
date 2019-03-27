@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:unit_converter/category_screen.dart';
 
 const _appName = 'Unit Converter';
-const _categoryName = 'Cake';
-const _categoryColor = Colors.green;
-const _categoryIcon = Icons.cake;
+final _bgColor = Colors.green[100];
 
 void main() => runApp(UnitConverterApp());
 
@@ -15,7 +13,7 @@ class UnitConverterApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: _appName,
       home: Scaffold(
-        backgroundColor: Colors.green[100],
+        backgroundColor: _bgColor,
         body: CategoryScreen(),
       ),
     );
