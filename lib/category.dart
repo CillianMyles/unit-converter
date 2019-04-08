@@ -23,6 +23,11 @@ class Category extends StatelessWidget {
         assert(units != null),
         super(key: key);
 
+  void _navigateToConverter(BuildContext context) {
+    print('I was tapped!');
+    // TODO: Using the Navigator, navigate to the [ConverterRoute]
+  }
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -33,9 +38,8 @@ class Category extends StatelessWidget {
           borderRadius: _borderRadius,
           highlightColor: color,
           splashColor: color,
-          // TODO: Update this onTap property to call _navigateToConverter()
           onTap: () {
-            print('I was tapped!');
+            _navigateToConverter(context);
           },
           child: Padding(
             padding: EdgeInsets.all(8.0),
