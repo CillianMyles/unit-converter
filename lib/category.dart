@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
+import 'package:unit_converter/converter_route.dart';
 import 'package:unit_converter/unit.dart';
 
 const _rowHeight = 100.0;
@@ -24,8 +25,14 @@ class Category extends StatelessWidget {
         super(key: key);
 
   void _navigateToConverter(BuildContext context) {
-    print('I was tapped!');
-    // TODO: Using the Navigator, navigate to the [ConverterRoute]
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ConverterRoute(
+              units: units,
+            ),
+      ),
+    );
   }
 
   @override
