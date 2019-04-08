@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:unit_converter/category_screen.dart';
+import 'package:unit_converter/category_route.dart';
 
 const _appName = 'Unit Converter';
 final _bgColor = Colors.green[100];
@@ -14,7 +14,7 @@ class UnitConverterApp extends StatelessWidget {
       title: _appName,
       home: Scaffold(
         backgroundColor: _bgColor,
-        body: CategoryScreen(),
+        body: CategoryRoute(),
       ),
     );
   }
