@@ -29,6 +29,8 @@ class Category extends StatelessWidget {
       context,
       MaterialPageRoute(
         builder: (context) => ConverterRoute(
+              name: name,
+              color: color,
               units: units,
             ),
       ),
