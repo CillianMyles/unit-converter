@@ -8,9 +8,14 @@ const _titleColor = Colors.black;
 final _bgColor = Colors.green[100];
 const _defaultIcon = Icons.cake;
 
-class CategoryRoute extends StatelessWidget {
+class CategoryRoute extends StatefulWidget {
   const CategoryRoute();
 
+  @override
+  _CategoryRouteState createState() => _CategoryRouteState();
+}
+
+class _CategoryRouteState extends State<CategoryRoute> {
   static const _categoryNames = <String>[
     'Length',
     'Area',
