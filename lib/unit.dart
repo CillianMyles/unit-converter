@@ -1,5 +1,7 @@
 import 'package:meta/meta.dart';
 
+@sealed
+@immutable
 class Unit {
   final String name;
   final double conversion;

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
+import 'package:unit_converter/constants.dart';
 import 'package:unit_converter/unit.dart';
 
 class ConverterRoute extends StatefulWidget {
@@ -29,7 +30,8 @@ class _ConverterRouteState extends State<ConverterRoute> {
         child: Text(
           widget.name,
           style: TextStyle(
-            fontSize: 30.0,
+            fontSize: titleSize,
+            color: titleColor,
           ),
         ),
       ),

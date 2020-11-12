@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:unit_converter/category.dart';
+import 'package:unit_converter/constants.dart';
 import 'package:unit_converter/unit.dart';
 
-const _appName = 'Unit Converter';
-const _titleSize = 30.0;
-const _titleColor = Colors.black;
-final _bgColor = Colors.green[100];
 const _defaultIcon = Icons.cake;
 
 class CategoryRoute extends StatefulWidget {
@@ -58,15 +55,15 @@ class _CategoryRouteState extends State<CategoryRoute> {
   @override
   Widget build(BuildContext context) {
     final appBar = AppBar(
-      backgroundColor: _bgColor,
+      backgroundColor: bgColor,
       elevation: 0.0,
       centerTitle: true,
       title: Center(
         child: Text(
-          _appName,
+          appName,
           style: TextStyle(
-            fontSize: _titleSize,
-            color: _titleColor,
+            fontSize: titleSize,
+            color: titleColor,
           ),
         ),
       ),
@@ -83,7 +80,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
     }
 
     final listView = Container(
-      color: _bgColor,
+      color: bgColor,
       padding: EdgeInsets.symmetric(horizontal: 8.0),
       child: _buildCategoryWidgets(categories),
     );

@@ -6,6 +6,8 @@ import 'package:unit_converter/unit.dart';
 const _rowHeight = 100.0;
 final _borderRadius = BorderRadius.circular(_rowHeight / 2);
 
+@sealed
+@immutable
 class Category extends StatelessWidget {
   final String name;
   final ColorSwatch color;
