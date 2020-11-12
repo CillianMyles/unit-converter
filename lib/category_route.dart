@@ -3,6 +3,8 @@ import 'package:unit_converter/category.dart';
 import 'package:unit_converter/unit.dart';
 
 const _appName = 'Unit Converter';
+const _titleSize = 30.0;
+const _titleColor = Colors.black;
 final _bgColor = Colors.green[100];
 const _defaultIcon = Icons.cake;
 
@@ -53,11 +55,13 @@ class CategoryRoute extends StatelessWidget {
     final appBar = AppBar(
       backgroundColor: _bgColor,
       elevation: 0.0,
+      centerTitle: true,
       title: Center(
         child: Text(
           _appName,
           style: TextStyle(
-            fontSize: 30.0,
+            fontSize: _titleSize,
+            color: _titleColor,
           ),
         ),
       ),
