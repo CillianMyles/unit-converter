@@ -13,6 +13,8 @@ class CategoryRoute extends StatefulWidget {
 }
 
 class _CategoryRouteState extends State<CategoryRoute> {
+  final _categories = <Category>[];
+
   static const _categoryNames = <String>[
     'Length',
     'Area',
@@ -35,10 +37,23 @@ class _CategoryRouteState extends State<CategoryRoute> {
     Colors.red,
   ];
 
-  Widget _buildCategoryWidgets(List<Widget> categories) {
+  @override
+  void initState() {
+    super.initState();
+    for (var i = 0; i < _categoryNames.length; i++) {
+      _categories.add(Category(
+        name: _categoryNames[i],
+        color: _baseColours[i],
+        iconLocation: _defaultIcon,
+        units: _retrieveUnitList(_categoryNames[i]),
+      ));
+    }
+  }
+
+  Widget _buildCategoryWidgets() {
     return ListView.builder(
-      itemBuilder: (BuildContext context, int index) => categories[index],
-      itemCount: categories.length,
+      itemBuilder: (BuildContext context, int index) => _categories[index],
+      itemCount: _categories.length,
     );
   }
 
@@ -69,20 +84,10 @@ class _CategoryRouteState extends State<CategoryRoute> {
       ),
     );
 
-    final categories = <Category>[];
-    for (var i = 0; i < _categoryNames.length; i++) {
-      categories.add(Category(
-        name: _categoryNames[i],
-        color: _baseColours[i],
-        iconLocation: _defaultIcon,
-        units: _retrieveUnitList(_categoryNames[i]),
-      ));
-    }
-
     final listView = Container(
       color: bgColor,
       padding: EdgeInsets.symmetric(horizontal: 8.0),
-      child: _buildCategoryWidgets(categories),
+      child: _buildCategoryWidgets(),
     );
 
     return Scaffold(
