@@ -27,16 +27,29 @@ class Category extends StatelessWidget {
         super(key: key);
 
   void _navigateToConverter(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => ConverterRoute(
-          name: name,
-          color: color,
-          units: units,
-        ),
-      ),
-    );
+    Navigator.of(context).push(MaterialPageRoute<Null>(
+      builder: (BuildContext context) {
+        return Scaffold(
+          appBar: AppBar(
+            elevation: 1.0,
+            title: Text(
+              name,
+              style: Theme.of(context).textTheme.headline4,
+            ),
+            centerTitle: true,
+            backgroundColor: color,
+          ),
+          body: ConverterRoute(
+            name: name,
+            color: color,
+            units: units,
+          ),
+          // This prevents the attempt to resize the screen when the keyboard
+          // is opened
+          resizeToAvoidBottomPadding: false,
+        );
+      },
+    ));
   }
 
   @override
@@ -47,11 +60,9 @@ class Category extends StatelessWidget {
         height: _rowHeight,
         child: InkWell(
           borderRadius: _borderRadius,
-          highlightColor: color,
-          splashColor: color,
-          onTap: () {
-            _navigateToConverter(context);
-          },
+          highlightColor: color['highlight'],
+          splashColor: color['splash'],
+          onTap: () => _navigateToConverter(context),
           child: Padding(
             padding: EdgeInsets.all(8.0),
             child: Row(
