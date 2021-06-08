@@ -1,27 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
+import 'package:unit_converter/category.dart';
 import 'package:unit_converter/unit.dart';
 
 const _padding = EdgeInsets.all(16.0);
 
-class ConverterRoute extends StatefulWidget {
-  final String name;
-  final Color color;
-  final List<Unit> units;
+class UnitConverter extends StatefulWidget {
+  final Category category;
 
-  ConverterRoute({
-    @required this.name,
-    @required this.color,
-    @required this.units,
-  })  : assert(name != null),
-        assert(color != null),
-        assert(units != null);
+  const UnitConverter({@required this.category}) : assert(category != null);
 
   @override
-  _ConverterRouteState createState() => _ConverterRouteState();
+  _UnitConverterState createState() => _UnitConverterState();
 }
 
-class _ConverterRouteState extends State<ConverterRoute> {
+class _UnitConverterState extends State<UnitConverter> {
   Unit _fromValue;
   Unit _toValue;
   double _inputValue;
@@ -36,10 +29,20 @@ class _ConverterRouteState extends State<ConverterRoute> {
     _setDefaults();
   }
 
+  @override
+  void didUpdateWidget(UnitConverter old) {
+    super.didUpdateWidget(old);
+    // We update our [DropdownMenuItem] units when we switch [Categories].
+    if (old.category != widget.category) {
+      _createDropdownMenuItems();
+      _setDefaults();
+    }
+  }
+
   /// Creates fresh list of [DropdownMenuItem] widgets, given a list of [Unit]s.
   void _createDropdownMenuItems() {
     var newItems = <DropdownMenuItem>[];
-    for (var unit in widget.units) {
+    for (var unit in widget.category.units) {
       newItems.add(DropdownMenuItem(
         value: unit.name,
         child: Container(
@@ -55,11 +58,12 @@ class _ConverterRouteState extends State<ConverterRoute> {
     });
   }
 
-  /// Sets the default values for the 'from' and 'to' [Dropdown]s.
+  /// Sets the default values for the 'from' and 'to' [Dropdown]s, and the
+  /// updated output value if a user had previously entered an input.
   void _setDefaults() {
     setState(() {
-      _fromValue = widget.units[0];
-      _toValue = widget.units[1];
+      _fromValue = widget.category.units[0];
+      _toValue = widget.category.units[1];
     });
   }
 
@@ -91,8 +95,8 @@ class _ConverterRouteState extends State<ConverterRoute> {
       if (input == null || input.isEmpty) {
         _convertedValue = '';
       } else {
-        // Even though we are using the numerical keyboard, we still have to
-        // check for non-numerical input such as '5..0' or '6 -3'
+        // Even though we are using the numerical keyboard, we still have to check
+        // for non-numerical input such as '5..0' or '6 -3'
         try {
           final inputDouble = double.parse(input);
           _showValidationError = false;
@@ -107,7 +111,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
   }
 
   Unit _getUnit(String unitName) {
-    return widget.units.firstWhere(
+    return widget.category.units.firstWhere(
       (Unit unit) {
         return unit.name == unitName;
       },
@@ -157,7 +161,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
               value: currentValue,
               items: _unitMenuItems,
               onChanged: onChanged,
-              style: Theme.of(context).textTheme.headline6,
+              style: Theme.of(context).textTheme.title,
             ),
           ),
         ),
@@ -176,9 +180,9 @@ class _ConverterRouteState extends State<ConverterRoute> {
           // accepts numbers and calls the onChanged property on update.
           // You can read more about it here: https://flutter.io/text-input
           TextField(
-            style: Theme.of(context).textTheme.headline4,
+            style: Theme.of(context).textTheme.display1,
             decoration: InputDecoration(
-              labelStyle: Theme.of(context).textTheme.headline4,
+              labelStyle: Theme.of(context).textTheme.display1,
               errorText: _showValidationError ? 'Invalid number entered' : null,
               labelText: 'Input',
               border: OutlineInputBorder(
@@ -211,11 +215,11 @@ class _ConverterRouteState extends State<ConverterRoute> {
           InputDecorator(
             child: Text(
               _convertedValue,
-              style: Theme.of(context).textTheme.headline4,
+              style: Theme.of(context).textTheme.display1,
             ),
             decoration: InputDecoration(
               labelText: 'Output',
-              labelStyle: Theme.of(context).textTheme.headline4,
+              labelStyle: Theme.of(context).textTheme.display1,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(0.0),
               ),
