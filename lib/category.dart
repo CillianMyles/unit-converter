@@ -26,67 +26,63 @@ class Category extends StatelessWidget {
         assert(units != null),
         super(key: key);
 
-  void _navigateToConverter(BuildContext context) {
-    Navigator.of(context).push(MaterialPageRoute<Null>(
-      builder: (BuildContext context) {
-        return Scaffold(
-          appBar: AppBar(
-            elevation: 1.0,
-            title: Text(
-              name,
-              style: Theme.of(context).textTheme.headline4,
-            ),
-            centerTitle: true,
-            backgroundColor: color,
-          ),
-          body: ConverterRoute(
-            name: name,
-            color: color,
-            units: units,
-          ),
-          // This prevents the attempt to resize the screen when the keyboard
-          // is opened
-          resizeToAvoidBottomPadding: false,
-        );
-      },
-    ));
-  }
+  void _navigateToConverter(BuildContext context) => Navigator.push(
+        context,
+        MaterialPageRoute<Null>(
+          builder: (BuildContext context) {
+            return Scaffold(
+              appBar: AppBar(
+                elevation: 1.0,
+                title: Text(
+                  name,
+                  style: Theme.of(context).textTheme.headline4,
+                ),
+                centerTitle: true,
+                backgroundColor: color,
+              ),
+              body: ConverterRoute(
+                name: name,
+                color: color,
+                units: units,
+              ),
+            );
+          },
+        ),
+      );
 
   @override
-  Widget build(BuildContext context) {
-    return Material(
-      color: Colors.transparent,
-      child: Container(
-        height: _rowHeight,
-        child: InkWell(
-          borderRadius: _borderRadius,
-          highlightColor: color['highlight'],
-          splashColor: color['splash'],
-          onTap: () => _navigateToConverter(context),
-          child: Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.all(16.0),
-                  child: Icon(
-                    iconLocation,
-                    size: 60.0,
+  Widget build(BuildContext context) => Material(
+        color: Colors.transparent,
+        child: Container(
+          height: _rowHeight,
+          child: InkWell(
+            borderRadius: _borderRadius,
+            highlightColor: color['highlight'],
+            splashColor: color['splash'],
+            onTap: () => _navigateToConverter(context),
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Icon(
+                      iconLocation,
+                      size: 60.0,
+                    ),
                   ),
-                ),
-                Center(
-                  child: Text(
-                    name,
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.headline,
+                  Center(
+                    child: Text(
+                      name,
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.headline,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
-      ),
-    );
-  }
+      );
 }
